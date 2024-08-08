@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  AtomicLoadMoreResults,
+  AtomicSearchInterface,
+  buildSearchEngine,
+  AtomicResultLink,
+  AtomicResultList
+} from "@coveo/atomic-react";
+import React from "react";
 
-function App() {
+export default function App() {
+  const engine = buildSearchEngine({
+    configuration: {
+      accessToken: "xx697404a7-6cfd-48c6-93d1-30d73d17e07a",
+      organizationId: "barcagroupproductionkwvdy6lp"
+    }
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <AtomicSearchInterface engine={engine}>
+      <AtomicResultList
+        display="grid"
+        template={() => <AtomicResultLink />}
+      />
+      <AtomicLoadMoreResults/>
+    </AtomicSearchInterface>
+  )
 }
-
-export default App;
